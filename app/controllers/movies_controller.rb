@@ -13,7 +13,15 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    #http://railscasts.com/episodes/228-sortable-table-columns?view=asciicast
+    @sort = params[:sort]
+    if @sort == 'title'
+      @title_hilite = 'hilite'
+    elsif @sort == "release_date"
+      @date_hilite = 'hilite'
+    end
+    @movies = Movie.order(params[:sort])
+    
   end
 
   def new
